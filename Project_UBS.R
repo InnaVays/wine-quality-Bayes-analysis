@@ -11,12 +11,12 @@ require(coda)
 library(tidyr)
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-wine <- read_delim("Documents/GlasgowUNI/Bayes_stat/winequality-red.csv", 
+wine <- read_delim("data/winequality-red.csv", 
                    ";", escape_double = FALSE, trim_ws = TRUE)
 
 ggplot(wine) +
   geom_bar(aes(quality ),alpha = 0.4, col='blue',fill= 'blue')+
-  xlab("Quality score") + ggtitle("White wine")+ ylab("Count")+ scale_x_continuous(limits = c(1, 9), breaks=1:9)
+  xlab("Quality score") + ggtitle("Red wine")+ ylab("Count")+ scale_x_continuous(limits = c(1, 9), breaks=1:9)
 
 set.seed(100)
 
@@ -51,7 +51,6 @@ var.names <- c('intercept',"fix.acidity","vol.acidity","citric.acid","res.sugar"
 #                          "alcohol", 'quality')
 #ggcorr(train.wine, label=TRUE, label_size = 3, legend.position = "none")
 
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #   linear model with ALL variables RED
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -205,6 +204,7 @@ ggplot(plot_fr_num) +
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #  NON linear model with significant coeffs
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 summary(reg_0)
 train.wine$quality <- as.factor(train.wine$quality)
 
@@ -257,9 +257,6 @@ X_n$log_va[is.infinite(X_n$log_va)] <- 0
 X_n$log_coc[is.infinite(X_n$log_coc)] <- 0
 
 
-
-
-
 # RED
 train.wine$quality <- as.factor(train.wine$quality)
 plot(train.wine$quality,train.wine$alcohol, ylab="Alcohol", xlab="Quality category") 
@@ -295,9 +292,7 @@ reg_1_r <- lm( quality ~ alcohol + `volatile acidity` + sulphates + chlorides - 
 summary(reg_1_r)
 
 
-
 # DISIGN MATRIX FOR RED
-
 
 X_n <- train.wine %>% transmute(log_alcohol=log(alcohol), log_sulphates=log(sulphates),
                                 log_va=log(`volatile acidity`),log_chlor=log(chlorides))
@@ -503,11 +498,11 @@ ggplot(plot_fr_num) +
   xlab("Quality score") + ggtitle("True score/Prediction")+ ylab("Density")+
   xlim(c(2,10))
 
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #  MULTINOMIAL REGRESSION  RED WHINE ONLY
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 train.mult_log <- train.wine
 
