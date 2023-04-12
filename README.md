@@ -5,8 +5,8 @@ The goal of this project is to perform a Bayesian analysis on the chemical chara
 
 Three models were developed and compared in this project:
 
-- Linear Regression
-- Ridge Linear Regression with variable transformations
+- Logistic Regression
+- Ridge Logistic Regression with variable transformations
 - Multinomial regression
 
 ## Summary
